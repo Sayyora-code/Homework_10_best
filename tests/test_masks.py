@@ -76,3 +76,13 @@ def test_get_mask_account_min_digits(input_data, expected):
 )
 def test_get_mask_card_number_with_letters(input_data, expected):
     assert get_mask_card_number(input_data) == expected
+
+@pytest.mark.parametrize(
+    "input_data, expected",
+    [(1234, "Некорректный ввод")],
+)
+def test_get_mask_account_min_digits(input_data, expected):
+    if len(str(input_data)) < 30:
+        assert "Некорректный ввод" == expected
+    else:
+        assert get_mask_account(input_data) == expected
