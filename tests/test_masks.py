@@ -33,8 +33,46 @@ def test_get_mask_card_number(input_data, expected):
     assert get_mask_card_number(input_data) == expected
 
 
-@pytest.mark.parametrize(
-    "input_data, expected", [(1234567890123456, "**3456"), (123, "Некорректный ввод")]
-)
-def test_get_mask_account(input_data, expected):
+def test_get_mask_card_number_empty_string():
+    input_data = ""
+    expected = "Некорректный ввод"
+    assert get_mask_card_number(input_data) == expected
+
+
+def test_get_mask_account_min_digits():
+    input_data = 1234
+    expected = "Некорректный ввод"
     assert get_mask_account(input_data) == expected
+
+
+def test_get_mask_card_number_with_letters():
+    input_data = "1234abcd5678"
+    expected = "Некорректный ввод"
+    assert get_mask_card_number(input_data) == expected
+
+
+# Пример теста для пустой строки
+@pytest.mark.parametrize(
+    "input_data, expected",
+    [("", "Некорректный ввод")],
+)
+def test_get_mask_card_number_empty_string(input_data, expected):
+    assert get_mask_card_number(input_data) == expected
+
+
+# Пример теста для минимально допустимого количества цифр
+@pytest.mark.parametrize(
+    "input_data, expected",
+    [(1234, "Некорректный ввод")],
+)
+def test_get_mask_account_min_digits(input_data, expected):
+    assert get_mask_account(input_data) == expected
+
+
+# Пример теста для ввода с буквами
+@pytest.mark.parametrize(
+    "input_data, expected",
+    [("1234abcd5678", "Некорректный ввод")],
+)
+def test_get_mask_card_number_with_letters(input_data, expected):
+    assert get_mask_card_number(input_data) == expected

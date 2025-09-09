@@ -21,7 +21,7 @@ def get_mask_account(account_number: Union[int]) -> str:
     """Функция принимает на вход номер счета в виде числа и
     возвращает маску номера по правилу **XXXX."""
     account_number = str(account_number)  # type: str
-    if len(account_number) >= 4:
+    if len(account_number) > 4:  # Изменено условие
         mask_account = f"**{account_number[-4:]}"
         return mask_account
     return "Некорректный ввод"
