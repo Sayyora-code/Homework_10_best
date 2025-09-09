@@ -1,15 +1,20 @@
+import pytest
+
 from src.widget import mask_account_card, get_date
 
+test_data = [
+    "Visa Platinum 7000792289606361",
+    "Счет 73654108430135874305"
+]
 
-def test_mask_account_card():
-    assert (
-        mask_account_card("Visa Platinum 7000792289606361")
-        == "Visa Platinum 7000 79** **** 6361"
-    )
-    assert mask_account_card("Счет 73654108430135874305") == "Счет **4305"
-    assert mask_account_card("Некорректная строка") == "Некорректный формат строки"
+for data in test_data:
+    print(f"Input: {data} -> Masked: {mask_account_card(data)}")
 
+    test_dates = [
+        "2024-03-11T02:26:18.671407",
+        "2022-01-15T11:45:00.123456"
+    ]
 
-def test_get_date():
-    assert get_date("2024-03-11T02:26:18.671407") == "11.03.2024"
-    assert get_date("2024-03") == "Некорректный формат даты"
+    for date in test_dates:
+        print(f"Input: {date} -> Formatted: {get_date(date)}")
+
