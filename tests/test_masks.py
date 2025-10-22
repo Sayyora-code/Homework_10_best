@@ -93,6 +93,7 @@ def test_get_mask_account_min_digits(input_data, expected):
     else:
         assert get_mask_account(input_data) == expected
 
+
 def test_get_mask_card_number_empty_string(test_data_get_mask_card_number):
     for input_data, expected in test_data_get_mask_card_number:
         assert get_mask_card_number(input_data) == expected
