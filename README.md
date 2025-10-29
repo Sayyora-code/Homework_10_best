@@ -10,7 +10,7 @@
 ## ⚙️ Установка
 1. Клонируйте репозиторий:
 ```
-https://github.com/Sayyora-code/feature-homework_10_1.git
+https://github.com/Sayyora-code/Homework_10_best.git
 ```
 2. Установите зависимости:
 ```
