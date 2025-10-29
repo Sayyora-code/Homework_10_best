@@ -35,12 +35,12 @@ MANIFEST
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
-
+htmlcov/
 # Unit test / coverage reports
 .tox/
 .nox/
 .coverage
-.coverage.*
+.coverage.*git commit
 .cache
 nosetests.xml
 coverage.xml
