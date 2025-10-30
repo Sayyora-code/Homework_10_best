@@ -133,6 +133,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
+htmlcov/
 .env
 .envrc
 .venv
