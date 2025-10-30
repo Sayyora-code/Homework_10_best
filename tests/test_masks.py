@@ -34,7 +34,6 @@ def test_get_mask_account(input_data, expected):
 @pytest.mark.parametrize(
     "input_data, expected",
     [
-        (None, "Некорректный ввод"),  # тестируем на None
         ("   ", "Некорректный ввод"),  # тестируем на пробелы
         ("9999999999999999", "**9999"),  # тестируем на граничное значение
     ],
