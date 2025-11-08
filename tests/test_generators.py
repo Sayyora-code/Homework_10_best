@@ -1,9 +1,5 @@
 import pytest
-from src.generators import (
-    filter_by_currency,
-    card_number_generator,
-    transaction_descriptions,
-)
+from src.generators import *
 
 
 @pytest.fixture()
@@ -51,3 +47,18 @@ def test_transaction_descriptions():  # описания транзакций к
     ]
     descriptions = list(transaction_descriptions(transactions))
     assert descriptions == ["Перевод организации", "Перевод с карты на счёт"]
+
+
+def test_card_number_generator():
+    expected_result = [
+        "0000 0000 0010 0001",
+        "0000 0000 0010 0002",
+        "0000 0000 0010 0003",
+        "0000 0000 0010 0004",
+        "0000 0000 0010 0005",
+        "0000 0000 0010 0006",
+        "0000 0000 0010 0007",
+        "0000 0000 0010 0008",
+    ]
+    result_card = card_number_generator(100001, 100008)
+    assert list(result_card) == expected_result
