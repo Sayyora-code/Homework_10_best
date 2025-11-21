@@ -12,7 +12,9 @@ api_key = os.getenv("API_KEY")
 
 def convert_exchange_rate(tr_list: dict) -> float:
     """Функция для работы с API формирует ссылку для работы с API и конвертирует валюту на выходе сумма в рублях"""
-    if tr_list["operationAmount"]["currency"]["code"] in ["EUR", "USD"]:
+    if tr_list["operationAmount"]["currency"]["code"] == "RUB":
+        return float(tr_list["operationAmount"]["amount"])
+    else:  # Перемещаем весь код для обращения к API сюда
         money_to = "RUB"
         money_from = tr_list["operationAmount"]["currency"]["code"]
         money_amount = tr_list["operationAmount"]["amount"]
@@ -37,6 +39,6 @@ def convert_exchange_rate(tr_list: dict) -> float:
             print(f"Ошибка запроса: {err}")
         except ValueError as json_err:
             print(f"Ошибка парсинга JSON: {json_err}")
-    else:
-        print("Некорректная валюта")
-        return 0.0
+
+
+# Теперь функция обращается к API только в случае, если валюта не является рублями.
