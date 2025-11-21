@@ -1,8 +1,7 @@
 import os
 import unittest
-from unittest.mock import mock_open, patch
+from unittest.mock import *
 from src.utils import read_json
-from unittest.mock import Mock
 
 
 # Создаем Mock объект
@@ -55,7 +54,7 @@ trans_test_value = [
 ]
 
 
-@patch("utils.read_json")
+@patch("src.utils.read_json")
 def test_read_json(mock_file):
     mock_file.return_value.json.return_value = trans_test_value
     assert read_json(file_path_data) == trans_test_value
