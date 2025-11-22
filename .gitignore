@@ -38,7 +38,7 @@ pip-delete-this-directory.txt
 # Unit test / coverage reports
 .tox/
 .nox/
-.coverage
+src/.coverage
 .coverage.*git commit
 .cache
 nosetests.xml
