@@ -1,8 +1,8 @@
 import os
 import unittest
 from unittest.mock import *
-from src.utils import read_json
 
+from src.utils import read_json
 
 # Создаем Mock объект
 mock_response = Mock()
