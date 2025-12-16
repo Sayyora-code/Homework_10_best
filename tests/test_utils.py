@@ -1,6 +1,6 @@
 import os
 import unittest
-from unittest.mock import *
+from unittest.mock import Mock, mock_open, patch
 
 from src.utils import read_json
 

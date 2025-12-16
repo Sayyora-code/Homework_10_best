@@ -52,7 +52,7 @@ def test_read_trans_excel():
         assert read_trans_excel("tеst.xlsx") == mock_data
 
 
-def test_read_trans_excel():
+def test_read_trans_excel_1():
     with pytest.raises(FileNotFoundError, match="Файл не найден"):
         raise FileNotFoundError("Файл не найден")
 
