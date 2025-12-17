@@ -52,3 +52,7 @@ def read_trans_excel(filename=None) -> list[dict]:
         app_logger.error("Файл не найден")
     except Exception as e:
         app_logger.error(e)
+
+
+"""read_trans_csv принимает имя CSV, проверяет его существование. использует csv.DictReader для чтения данных, возвращая их в виде списка словарей"""
+"""read_trans_excel использует pandas.read_excel для чтения данных и преобразует их в список словарей"""
