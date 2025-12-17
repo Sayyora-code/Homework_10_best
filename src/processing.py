@@ -1,81 +1,57 @@
-from src.widget import get_date
+import re
+from collections import Counter
+from datetime import datetime
+from typing import Dict, List
 
 
-def filter_by_state(list_of_dict: list, state="EXECUTED") -> list:
-    """Функция возвращает новый список словарей, содержащий только те словари, у которых ключ
-    state
-     соответствует указанному значению"""
-    filtered_list = []
-    for dict_item in list_of_dict:
+def sort_by_date(data_list: List[dict], reverse1: bool = True) -> List[dict]:
+    """Функия принимает список словарей и необязательный параметр,
+    задающий порядок сортировки (по умолчанию — убывание). Функция
+    должна возвращать новый список, отсортированный по дате (date)"""
+    # Преобразуем строки дат в объекты datetime для корректной сортировки
+    list_sorted = sorted(
+        data_list,
+        key=lambda x: datetime.fromisoformat(x["date"].replace("Z", "+00:00")),
+        reverse=reverse1,
+    )
+    return list_sorted
+
+
+def filter_by_state(
+    banking_operations: List[Dict[str, str]], state: str = "EXECUTED"
+) -> List[dict]:
+    filtered_list: List[dict] = []
+    # функция фильтрует данные по статусу
+    for dict_item in banking_operations:
         if dict_item.get("state") == state:
             filtered_list.append(dict_item)
-
     return filtered_list
 
 
-# Проверка работы кода
-if __name__ == "__main__":
-    print(
-        filter_by_state(
-            [
-                {
-                    "id": 41428829,
-                    "state": "EXECUTED",
-                    "date": "2019-07-03T18:35:29.512364",
-                },
-                {
-                    "id": 939719570,
-                    "state": "EXECUTED",
-                    "date": "2018-06-30T02:08:58.425572",
-                },
-                {
-                    "id": 594226727,
-                    "state": "CANCELLED",
-                    "date": "2018-09-12T21:27:25.241689",
-                },
-                {
-                    "id": 615064591,
-                    "state": "CANCELLED",
-                    "date": "2018-10-14T08:21:33.419441",
-                },
-            ]
-        )
-    )
+def process_bank_search(list_dict: list[dict], search_string: str) -> list[dict]:
+    """принимает список словарей с данными о банковских операциях и строку поиска, а возвращает список словарей,
+    у которых в описании есть данная строка."""
+    try:
+        new_list_dict = list()
+
+        pattern = re.compile(search_string, re.IGNORECASE)
+        for item in list_dict:
+            key_value = item.get("description")
+            if key_value and pattern.search(key_value):
+                new_list_dict.append(item)
+    except Exception as e:
+        print(f"Внимание! Ошибка {e}! Введены не корректные данные!")
+    return new_list_dict
 
 
-def sort_by_date(data_list: list, data_key="date", descending=True) -> list:
-    """Функция, которая принимает список словарей и необязательный параметр,
-    задающий порядок сортировки (по умолчанию — убывание). Функция должна возвращать
-     новый список, отсортированный по дате (date)."""
-    return sorted(data_list, key=lambda x: get_date(x[data_key]), reverse=descending)
-
-    # Проверка работы кода
-
-
-if __name__ == "__main__":
-    print(
-        sort_by_date(
-            [
-                {
-                    "id": 41428829,
-                    "state": "EXECUTED",
-                    "date": "2019-07-03T18:35:29.512364",
-                },
-                {
-                    "id": 939719570,
-                    "state": "EXECUTED",
-                    "date": "2018-06-30T02:08:58.425572",
-                },
-                {
-                    "id": 594226727,
-                    "state": "CANCELLED",
-                    "date": "2018-09-12T21:27:25.241689",
-                },
-                {
-                    "id": 615064591,
-                    "state": "CANCELLED",
-                    "date": "2018-10-14T08:21:33.419441",
-                },
-            ]
-        )
-    )
+def process_bank_operations(data: list[dict], categories: list) -> dict:
+    """принимает список словарей с данными о банковских операциях и список категорий операций, а возвращает словарь,
+    в котором ключи — это названия категорий, а значения — это количество операций в каждой категории.
+    """
+    categories_counter = Counter()
+    for operation in data:
+        description = operation.get("description", "")
+        for category in categories:
+            if category.lower() in description.lower():
+                categories_counter[category] += 1
+    return categories_counter
