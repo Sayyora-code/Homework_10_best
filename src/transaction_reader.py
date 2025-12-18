@@ -20,7 +20,6 @@ with open(file_log, "w"):
 
 
 def read_trans_csv(filename=None) -> list[dict]:
-    # Функция считывания словаря транзакций из файла csv
     """read_trans_csv принимает имя CSV, проверяет его существование.
     использует csv.DictReader для чтения данных
      возвращая их в виде списка словарей"""
@@ -41,7 +40,6 @@ def read_trans_csv(filename=None) -> list[dict]:
 
 
 def read_trans_excel(filename=None) -> list[dict]:
-    # функция для чтения из Excel файла
     """read_trans_excel использует pandas.read_excel для чтения данных,
     преобразует их в список словарей"""
     try:
