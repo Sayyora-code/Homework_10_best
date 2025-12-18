@@ -21,6 +21,9 @@ with open(file_log, "w"):
 
 def read_trans_csv(filename=None) -> list[dict]:
     # Функция считывания словаря транзакций из файла csv
+    """read_trans_csv принимает имя CSV, проверяет его существование.
+    использует csv.DictReader для чтения данных
+     возвращая их в виде списка словарей"""
     try:
         # print(filename)
         if os.path.isfile(filename):
@@ -39,6 +42,8 @@ def read_trans_csv(filename=None) -> list[dict]:
 
 def read_trans_excel(filename=None) -> list[dict]:
     # функция для чтения из Excel файла
+    """read_trans_excel использует pandas.read_excel для чтения данных,
+    преобразует их в список словарей"""
     try:
         if os.path.isfile(filename):
             # Открываем файл и читаем строки
@@ -53,7 +58,5 @@ def read_trans_excel(filename=None) -> list[dict]:
     except Exception as e:
         app_logger.error(e)
 
-
-"""read_trans_csv принимает имя CSV, проверяет его существование. использует csv.DictReader для чтения данных, возвращая их в виде списка словарей"""
-"""read_trans_excel использует pandas.read_excel для чтения данных и преобразует их в список словарей"""
-"""Обе функции также логируют успешное выполнение или ошибки, такие как отсутствие файла, с помощью настроенного логгера app_logger"""
+    """Обе функции также логируют успешное выполнение или ошибки, 
+    такие как отсутствие файла, с помощью настроенного логгера app_logger"""
