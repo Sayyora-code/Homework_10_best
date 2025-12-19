@@ -55,6 +55,3 @@ def read_trans_excel(filename=None) -> list[dict]:
         app_logger.error("Файл не найден")
     except Exception as e:
         app_logger.error(e)
-
-    """Обе функции также логируют успешное выполнение или ошибки, 
-    такие как отсутствие файла, с помощью настроенного логгера app_logger"""
